@@ -133,7 +133,7 @@ h1 {
     width: 10px;
     height: 30%;
     border-radius: 2px;
-    background-color: palevioletred;
+    background-color: rgb(26, 129, 197);
     transition: 0.5s;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
   }
