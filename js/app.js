@@ -1,3 +1,5 @@
+// prevent default event touchmove on mobile view
+document.body.addEventListener('touchmove', function(e){ e.preventDefault(); });
 
 const playBtn = document.querySelector('.play-btn')
 const music = document.querySelector('#audio')
@@ -12,14 +14,12 @@ const backwardBtn = document.querySelector('.backward-btn')
 
 playBtn.addEventListener('click', () => {
   if (playBtn.className.includes('pause')){
-    playBtn.classList.toggle('pause')
-    disk.classList.toggle('play')
-    music.play() 
+    music.play()
   }else{ 
-    playBtn.classList.toggle('pause')
-    disk.classList.toggle('play') 
     music.pause()
   }
+  playBtn.classList.toggle('pause')
+  disk.classList.toggle('play') 
 })
 
 const setMusic = (i) => {
@@ -36,9 +36,9 @@ const setMusic = (i) => {
     seekBar.max = music.duration
     console.log('duration', music.duration)
     musicDuration.innerHTML = formatTime(music.duration)
-  }, 300)
+  }, 700)
 }
-setMusic(4)
+setMusic(0)
 
 const formatTime = (time) =>{
   let minutes = Math.floor(time/60)
@@ -74,3 +74,19 @@ forwardBtn.addEventListener('click', () => {
   setMusic(currentMusic)
   playMusic()
 })
+
+backwardBtn.addEventListener('click', () => {
+    if(currentMusic <= 0){
+        currentMusic = songs.length - 1
+    } else {
+        currentMusic--
+    }
+    setMusic(currentMusic)
+    playMusic()
+})
+
+const playMusic = () => {
+    music.play()
+    playBtn.classList.remove('pause')
+    disk.classList.add('play')
+}
